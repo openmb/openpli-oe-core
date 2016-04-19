@@ -51,6 +51,9 @@ OPTIONAL_PACKAGES += " \
 	python-ntplib \
 	python-requests \
 	python-mechanize \
+	python-lxml \
+	picocom \
+	ppp \
 	rsync \
 	rtorrent \
 	sabnzbd \
@@ -62,7 +65,11 @@ OPTIONAL_PACKAGES += " \
 	tcpdump \
 	transmission \
 	udpxy \
+	usb-modeswitch \
+	usb-modeswitch-data \
+	v4l-utils \
 	vim \
+	wscan \
 	xfsprogs \
 	zeroconf \
 	zip \
@@ -81,8 +88,12 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-xmltvimport \
 	enigma2-plugin-extensions-youtube \
 	enigma2-plugin-extensions-modifyplifullhd \
+	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugin-systemplugins-extnumberzap \
+	enigma2-plugin-extensions-historyzapselector \
+	enigma2-plugin-extensions-tmbd \
+	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-security-firewall \
 	enigma2-plugin-skins-pli-hd \
 	enigma2-plugin-skins-pli-hd-fullnight \

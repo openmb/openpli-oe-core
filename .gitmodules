@@ -44,3 +44,6 @@
 [submodule "meta-miraclebox"]
 	path = meta-miraclebox
 	url = https://github.com/openmb/meta-miraclebox.git
+[submodule "meta-edision"]
+	path = meta-edision
+	url = http://github.com/open-edision/meta-edision.git
