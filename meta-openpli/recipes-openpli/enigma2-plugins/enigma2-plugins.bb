@@ -13,14 +13,19 @@ PACKAGES += "\
 	enigma2-plugin-extensions-mosaic \
 	enigma2-plugin-extensions-fancontrol2 \
 	enigma2-plugin-extensions-bonjour \
+	enigma2-plugin-extensions-transmission \
+	enigma2-plugin-systemplugins-systemtime \
 	"
 RDEPENDS_enigma2-plugin-extensions-mosaic = "aio-grab"
 RDEPENDS_enigma2-plugin-extensions-fancontrol2 = "smartmontools hdparm"
-RDEPENDS_enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
 RDEPENDS_enigma2-plugin-extensions-bonjour = "avahi-daemon"
 
+RRECOMMENDS_enigma2-plugin-systemplugins-blindscan = "virtual/blindscan-dvbs"
+RRECOMMENDS_enigma2-plugin-systemplugins-systemtime = "ntpdate"
+RRECOMMENDS_enigma2-plugin-extensions-transmission = "transmission transmission-client"
+
 PROVIDES += "\
-	${@base_contains("MACHINE_FEATURES", "transcoding","enigma2-plugin-systemplugins-transcodingsetup","",d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "transcoding","enigma2-plugin-systemplugins-transcodingsetup","",d)} \
 "
 
 inherit gitpkgv pythonnative pkgconfig
@@ -55,7 +60,7 @@ FILES_enigma2-plugin-extensions-netcaster += "${sysconfdir}/NETcaster.conf"
 CONFFILES_enigma2-plugin-extensions-netcaster += "${sysconfdir}/NETcaster.conf"
 
 FILES_${PN}-meta = "${datadir}/meta"
-PACKAGES += "${PN}-meta"
+PACKAGES += "${PN}-meta ${PN}-build-dependencies"
 
 inherit autotools-brokensep
 
@@ -79,11 +84,11 @@ python populate_packages_prepend () {
     def getControlLines(mydir, d, package):
         import os
         try:
-            src = open(mydir + package + "/CONTROL/control").read()
-        except Exception, ex:
-            bb.note("Failed to get control lines for package '%s': %s" % (package, ex))
+            src = open(mydir + package + "/CONTROL/control")
+        except:
+            bb.note("Failed to get control lines for package '%s'" % (package))
             return
-        for line in src.split("\n"):
+        for line in src:
             full_package = "enigma2-plugin-extensions-" + package
             if line.startswith('Package: '):
                 full_package = line[9:]

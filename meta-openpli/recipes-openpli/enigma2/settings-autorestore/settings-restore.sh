@@ -3,13 +3,6 @@
 # it again later, but that may destroy settings that you did.
 # Restore files from backup dir with the most recent timestamp
 
-if [ $(find /media -maxdepth 2 -iname nobackup) ]
-then
-    echo abort settings restore
-    rm -f /etc/rc?.d/S*settingsrestore*
-    exit 0
-fi
-
 BACKUPDIR=/media/hdd
 MACADDR=`cat /sys/class/net/eth0/address | cut -b 1,2,4,5,7,8,10,11,13,14,16,17`
 
@@ -46,9 +39,6 @@ do
    fi    
 done
 
-# suicide...
-rm -f /etc/rc?.d/S*settingsrestore*
-
 if  [ ! -f ${BACKUPDIR}/backup/.timestamp ]
 then
     echo "No valid backup location, aborting auto-restore"
@@ -73,6 +63,9 @@ else
     exec /etc/init.d/settings-restore.old.sh ${BACKUPDIR}
     exit 1
 fi
+
+# restart network interfaces based on the parameters from settings-restore
+/etc/init.d/networking restart
 
 echo ${BACKUPDIR} > /tmp/backupdir
 

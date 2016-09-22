@@ -6,7 +6,7 @@ require conf/license/openpli-gplv2.inc
 
 inherit gitpkgv
 
-SRCREV = "fc85c80161cfe8358729c420c560d608ee5ca3c8"
+SRCREV = "b23ab39f5943b6bb8f9fcf07a30c0efd5889885c"
 PV = "2+git${SRCPV}"
 PKGV = "2+git${GITPKGV}"
 RDEPENDS_${PN} = "enigma2-plugin-systemplugins-transcodingsetup"
@@ -26,6 +26,6 @@ do_install_append() {
 }
 
 INITSCRIPT_NAME = "streamproxy.sh"
-INITSCRIPT_PARAMS = "defaults"
+INITSCRIPT_PARAMS = "defaults 30 70"
 
 inherit update-rc.d

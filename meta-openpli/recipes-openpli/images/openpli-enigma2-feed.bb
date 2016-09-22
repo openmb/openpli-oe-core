@@ -16,12 +16,15 @@ OPTIONAL_PACKAGES_BROKEN = "samba"
 OPTIONAL_PACKAGES ?= ""
 OPTIONAL_BSP_PACKAGES ?= ""
 OPTIONAL_PACKAGES += " \
+	astra-sm \
 	autofs \
 	autossh \
 	ctorrent \
 	cups \
 	djmount \
+	dosfstools \
 	dvb-apps \
+	dvblast \
 	dvbsnoop \
 	dvdfs \
 	evtest \
@@ -34,6 +37,7 @@ OPTIONAL_PACKAGES += " \
 	iperf \
 	joe \
 	libbluray \
+	libudfread \
 	mc \
 	minisatip \
 	mtd-utils \
@@ -45,6 +49,7 @@ OPTIONAL_PACKAGES += " \
 	openresolv \
 	openssh \
 	openvpn \
+	openmultiboot \
 	parted \
 	procps \
 	pyload \
@@ -87,11 +92,14 @@ ENIGMA2_OPTIONAL = " \
 	enigma2-plugin-extensions-blurayplayer \
 	enigma2-plugin-extensions-xmltvimport \
 	enigma2-plugin-extensions-youtube \
+	enigma2-plugin-extensions-openmultiboot \
 	enigma2-plugin-extensions-modifyplifullhd \
+	enigma2-plugin-extensions-refreshbouquet \
 	enigma2-plugin-systemplugins-mountmanager \
 	enigma2-plugin-systemplugins-signalfinder \
 	enigma2-plugin-systemplugins-extnumberzap \
 	enigma2-plugin-extensions-historyzapselector \
+	enigma2-plugin-extensions-lcd4linux \
 	enigma2-plugin-extensions-tmbd \
 	enigma2-plugin-extensions-xmodem \
 	enigma2-plugin-security-firewall \
@@ -102,8 +110,9 @@ ENIGMA2_OPTIONAL = " \
 	picons-enigma2-meta \
 	softcams-enigma2-meta \
 	packagegroup-openplugins \
-	${@base_contains("MACHINE_FEATURES", "blindscan-dvbs", "enigma2-plugin-systemplugins-satscan" , "", d)} \
-	${@base_contains("MACHINE_FEATURES", "dreambox", "", "enigma2-plugin-extensions-backupsuite", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "blindscan-dvbs", "enigma2-plugin-systemplugins-satscan" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "dreambox", "", "enigma2-plugin-extensions-backupsuite", d)} \
+	${@bb.utils.contains('EXTRA_IMAGEDEPENDS', 'vuplus-tuner-turbo', 'enigma2-plugin-drivers-dvb-usb-turbo', '', d)} \
 	dvb-usb-drivers-meta \
 	cdtextinfo \
 	meta-enigma2-dvdburn \

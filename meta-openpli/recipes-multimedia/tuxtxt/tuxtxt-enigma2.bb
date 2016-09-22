@@ -6,7 +6,7 @@ DESCRIPTION = "tuxbox tuxtxt for enigma2"
 
 inherit gitpkgv
 
-SRCREV = "96a370821555923ad34dc1ec8e029477c914e3d3"
+SRCREV = "a1b42559e865bc9e58a35a4c3479f32c729b7f51"
 GITHUB_URI ?= "git://github.com"
 SRC_URI = "${GITHUB_URI}/OpenPLi/tuxtxt.git"
 
@@ -24,7 +24,7 @@ CONFFILES_${PN} = "/etc/tuxtxt/tuxtxt2.conf"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "--with-boxtype=generic --with-configdir=/etc \
-	${@base_contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
 	DVB_API_VERSION=5\
 	"
 
